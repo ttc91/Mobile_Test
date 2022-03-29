@@ -34,8 +34,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                Log.e("NULL", edt_money.getText().toString().trim());
-
                 if (edt_money.getText().toString().trim() != ""  && edt_interest.getText().toString().trim() != ""
                  && edt_term.getText().toString().trim() != ""){
 

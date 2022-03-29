@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.android.mobile_test.databinding.ActivityResultBinding;
 
@@ -25,6 +26,9 @@ public class MainActivity2 extends AppCompatActivity {
     private Button btn_back;
     private Button btn_result;
 
+    private TextView interest_result;
+    private TextView total_result;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,13 +36,14 @@ public class MainActivity2 extends AppCompatActivity {
 
         init();
 
-
-
     }
 
     public void init(){
         btn_back = findViewById(R.id.btn_back);
         btn_result = findViewById(R.id.btn_result);
+
+        interest_result = findViewById(R.id.interest_result);
+        total_result = findViewById(R.id.total_result);
 
         compute();
     }
@@ -49,9 +54,28 @@ public class MainActivity2 extends AppCompatActivity {
 
         Bundle extras = getIntent().getExtras();
 
-        money = extras.getString("money");
-        interest = extras.getString("interest");
-        term = extras.getString("term");
+        if(extras != null){
+            money = extras.getString("money");
+            interest = extras.getString("interest");
+            term = extras.getString("term");
+
+            if(money != null && interest != null && term != null){
+                interest_result.setText("Nhập lại !");
+                total_result.setText(String.valueOf(0.000));
+                return;
+            }
+
+            double d_money = Double.parseDouble(money);
+            double d_interest = Double.parseDouble(interest);
+            double d_term = Double.parseDouble(term);
+
+            double int_money = (d_money * (d_interest / 100) * (d_term * 30)) / 360;
+
+            interest_result.setText(String.valueOf(int_money));
+            total_result.setText(String.valueOf(int_money + d_money));
+        }
+
+
 
 
     }
