@@ -60,7 +60,7 @@ public class MainActivity2 extends AppCompatActivity {
             interest = extras.getString("interest");
             term = extras.getString("term");
 
-            if(money.equals("") && interest.equals("") && term.equals("")){
+            if(money.equals("") || interest.equals("") || term.equals("")){
 
                 interest_result.setText("Nhập lại !");
                 total_result.setText(String.valueOf(0.000));
