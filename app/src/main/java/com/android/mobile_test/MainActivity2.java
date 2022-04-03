@@ -11,6 +11,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -19,9 +20,9 @@ import com.android.mobile_test.databinding.ActivityResultBinding;
 
 public class MainActivity2 extends AppCompatActivity {
 
-    String money;
-    String interest;
-    String term;
+    String money = "";
+    String interest = "";
+    String term = "";
 
     private Button btn_back;
     private Button btn_result;
@@ -59,11 +60,15 @@ public class MainActivity2 extends AppCompatActivity {
             interest = extras.getString("interest");
             term = extras.getString("term");
 
-            if(money != null && interest != null && term != null){
+            if(money.equals("") && interest.equals("") && term.equals("")){
+
                 interest_result.setText("Nhập lại !");
                 total_result.setText(String.valueOf(0.000));
+
                 return;
             }
+
+            Log.e("TAG", "'"+ money+"'");
 
             double d_money = Double.parseDouble(money);
             double d_interest = Double.parseDouble(interest);
@@ -73,6 +78,8 @@ public class MainActivity2 extends AppCompatActivity {
 
             interest_result.setText(String.valueOf(int_money));
             total_result.setText(String.valueOf(int_money + d_money));
+
+
         }
 
 
